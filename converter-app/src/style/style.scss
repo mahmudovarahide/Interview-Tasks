@@ -1,6 +1,25 @@
 @import '_reset.scss';
 @import '_variable.scss';
 @import '_mixin.scss';
+.dropdown-group {
+    @include border-radius;
+    .dropdown {
+        box-shadow: $--shadow !important;
+        @include border-radius;
+        padding: .5rem 2rem;
+        width: 40%;
+        .dropdown-toggle::after {
+            margin-left: 16rem;
+        }
+    }
+    .icon-box-drowdown-group {
+        i {
+            color: $--blue;
+            font-size: 1.5rem;
+        }
+    }
+}
+
 .amount {
     height: 200px;
     background-color: $--white;
