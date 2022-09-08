@@ -1,6 +1,41 @@
+import React, { useEffect, useState } from 'react';
 import './style/style.css';
+import axios from 'axios';
 
 function App() {
+
+  const [allCurrency, setAllCureency] = useState([])
+  const [result, setResult] = useState(undefined)
+  const [to, setTo] = useState("AZN")
+  const [from, setFrom] = useState("USD")
+  const [amount, setAmount] = useState(100)
+
+
+  useEffect(() => {
+    axios.get(`https://api.apilayer.com/exchangerates_data/latest?symbols=EUR,RUB,TRY,GBP,JPY,USD&base=${to}`, {
+      headers: {
+        "apikey": "1pq7dHdHGvOULT0hIbYcEL2AcpWI3gMl"
+      }
+    }).then(res => {
+      setAllCureency(res.data.rates)
+    })
+  }, [to])
+
+  useEffect(() => {
+    setResult(undefined)
+    if (allCurrency) {
+      const result = allCurrency[from] * amount
+      setResult(result)
+    }
+  }, [allCurrency, to, from, amount])
+
+
+  const handleExchange = (value) => {
+    setAmount(value) 
+  }
+
+
+
   return (
     <>
       <section className="converter mt-5">
@@ -8,12 +43,14 @@ function App() {
           <div className="dropdown-group d-flex justify-content-between align-items-center gap-3">
             <div className="dropdown">
               <a className="btn dropdown-toggle w-100" href="/" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
+                {to}
               </a>
               <ul className="dropdown-menu w-75" aria-labelledby="dropdownMenuLink">
-                <li><a className="dropdown-item" href="/">Action</a></li>
-                <li><a className="dropdown-item" href="/">Another action</a></li>
-                <li><a className="dropdown-item" href="/">Something else here</a></li>
+                {
+                  Object.keys(allCurrency)?.map((currency, index) => (
+                    <li><span className="dropdown-item" key={index} onClick={() => setTo(currency)} >{currency}</span></li>
+                  ))
+                }
               </ul>
             </div>
             <div className="icon-box-drowdown-group">
@@ -21,12 +58,16 @@ function App() {
             </div>
             <div className="dropdown">
               <a className="btn dropdown-toggle w-100" href="/" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
+                {from}
               </a>
               <ul className="dropdown-menu w-75" aria-labelledby="dropdownMenuLink">
-                <li><a className="dropdown-item" href="/">Action</a></li>
-                <li><a className="dropdown-item" href="/">Another action</a></li>
-                <li><a className="dropdown-item" href="/">Something else here</a></li>
+
+                {
+                  Object.keys(allCurrency)?.map((currency, index) => (
+                    <li><span className="dropdown-item" key={index} onClick={() => setFrom(currency)} >{currency}</span></li>
+                  ))
+                }
+
               </ul>
             </div>
           </div>
@@ -36,67 +77,35 @@ function App() {
             </div>
             <form>
               <div className="input-box">
-                <input type="text" className="w-100" placeholder="Qiymət daxil edin..." />
+                <input type="text" className="w-100" placeholder="Qiymət daxil edin..." onChange={(e) => handleExchange(e.target.value)} defaultValue={amount} />
                 <div className="spinner-box">
-                  <i className="fa-solid fa-arrows-spin"></i>
+                  <i className="fa-solid fa-arrows-spin" onClick={handleExchange}></i>
                 </div>
               </div>
-              <h6 className="mt-3">164.8 Lari</h6>
+              {
+                result ? <h6 className="mt-3">{`${result} ${from}`}</h6> : "Loading..."
+              }
+
             </form>
           </div>
           <div className="lists-boxes mt-4">
-            <div className="list-box py-3 mt-3">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex gap-3">
-                  <div className="icon-box">
-                    <i className="fa-solid fa-dollar-sign"></i>
-                  </div>
-                  <div className="converter-name">
-                    Dollar
-                  </div>
-                </div>
-                <div className="price-box">23</div>
-              </div>
-            </div>
-            <div className="list-box py-3 mt-3">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex gap-3">
-                  <div className="icon-box">
-                    <i className="fa-solid fa-dollar-sign"></i>
-                  </div>
-                  <div className="converter-name">
-                    Dollar
+            {
+              Object.keys(allCurrency).map(name => (
+                <div className="list-box py-3 mt-3">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex gap-3">
+                      <div className="icon-box">
+                        {/* <i className="fa-solid fa-dollar-sign"></i> */}
+                      </div>
+                      <div className="converter-name">
+                        {name}
+                      </div>
+                    </div>
+                    <div className="price-box">{allCurrency[name]}</div>
                   </div>
                 </div>
-                <div className="price-box">23</div>
-              </div>
-            </div>
-            <div className="list-box py-3 mt-3">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex gap-3">
-                  <div className="icon-box">
-                    <i className="fa-solid fa-dollar-sign"></i>
-                  </div>
-                  <div className="converter-name">
-                    Dollar
-                  </div>
-                </div>
-                <div className="price-box">23</div>
-              </div>
-            </div>
-            <div className="list-box py-3 mt-3">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex gap-3">
-                  <div className="icon-box">
-                    <i className="fa-solid fa-dollar-sign"></i>
-                  </div>
-                  <div className="converter-name">
-                    Dollar
-                  </div>
-                </div>
-                <div className="price-box">23</div>
-              </div>
-            </div>
+              ))
+            }
           </div>
         </div>
       </section>
