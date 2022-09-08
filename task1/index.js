@@ -2,9 +2,14 @@ const isPolindrome = (e) => {
     const length = e.length;
     for (let i = 0; i < length / 2; i++) {
         if (e[i] !== e[length - 1 - i]) {
-            return "Bu palindromdur."
+            return false
         }
     }
-    return "Bu palindrom deyil"
+    return true
 }
-const value = isPolindrome("ənənə");
+
+var check = isPolindrome('ənənə')
+if (check) {
+    console.log('palindromdur')
+} else
+    console.log('palindrom deyil')

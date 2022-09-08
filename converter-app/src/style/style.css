@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: nones;
+}
+
+.amount {
+  height: 200px;
+  background-color: #fff;
+  -webkit-box-shadow: 3px 3px 10px rgba(14, 87, 214, 0.26);
+          box-shadow: 3px 3px 10px rgba(14, 87, 214, 0.26);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.amount .amount-heading h3 {
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.amount form .input-box {
+  position: relative;
+}
+
+.amount form .input-box input {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  background-color: #F2F2F2;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  padding: .5rem 1rem;
+}
+
+.amount form .input-box .spinner-box {
+  position: absolute;
+  top: 0;
+  right: 0.05rem;
+  background-color: #fff;
+  margin-top: 1px;
+  padding: 0.5rem 1.7rem;
+  border-radius: 0px 10px 10px 0px;
+  -webkit-border-radius: 0px 10px 10px 0px;
+  -moz-border-radius: 0px 10px 10px 0px;
+  -ms-border-radius: 0px 10px 10px 0px;
+  -o-border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+}
+
+.amount form .input-box .spinner-box i {
+  color: #0E57D6;
+  font-size: 1.2rem;
+}
+
+.lists-boxes .list-box {
+  -webkit-box-shadow: 3px 3px 10px rgba(14, 87, 214, 0.26);
+          box-shadow: 3px 3px 10px rgba(14, 87, 214, 0.26);
+  padding: 0 1rem;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+/*# sourceMappingURL=style.css.map */

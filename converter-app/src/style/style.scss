@@ -1,0 +1,52 @@
+@import '_reset.scss';
+@import '_variable.scss';
+@import '_mixin.scss';
+.amount {
+    height: 200px;
+    background-color: $--white;
+    box-shadow: $--shadow;
+    @include border-radius;
+    .amount-heading {
+        h3 {
+            font-size: 18px;
+            line-height: 21px;
+        }
+    }
+    form {
+        .input-box {
+            position: relative;
+            input {
+                @include border-radius-10;
+                background-color: $--gray;
+                border: $--border;
+                padding: .5rem 1rem;
+            }
+            .spinner-box {
+                position: absolute;
+                top: 0;
+                right: 0.05rem;
+                background-color: #fff;
+                margin-top: 1px;
+                padding: 0.5rem 1.7rem;
+                border-radius: 0px 10px 10px 0px;
+                -webkit-border-radius: 0px 10px 10px 0px;
+                -moz-border-radius: 0px 10px 10px 0px;
+                -ms-border-radius: 0px 10px 10px 0px;
+                -o-border-radius: 0px 10px 10px 0px;
+                cursor: pointer;
+                i {
+                    color: $--blue;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
+
+.lists-boxes {
+    .list-box {
+        box-shadow: $--shadow;
+        padding: 0 1rem;
+        @include border-radius;
+    }
+}
